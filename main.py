@@ -13,8 +13,6 @@ last_milli_time = current_milli_time()
 
 running = None
 
-
-
 def main():
 	global running
 	running = True
