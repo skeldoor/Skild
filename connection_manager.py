@@ -7,7 +7,7 @@ import threading
 import config
 import player_manager
 from player import Player
-import data_parser
+import data_manager
 
 class Connection_manager(object):
 
@@ -18,7 +18,8 @@ class Connection_manager(object):
 		broadcasted = []
 		for player in pm.listPlayers():
 			try:
-				player.connection.sendall("data".encode())
+				data = str(player.xposition) + " " + str(player.yposition)
+				player.connection.sendall(data.encode())
 				broadcasted.append(player)
 			except socket.error as msg:
 				pm.remove(player)
@@ -56,7 +57,7 @@ class Connection_manager(object):
 			data = conn.recv(1024)
 			if not data:
 				break
-			data_parser.parse_incoming(data)
+			data_manager.parse_incoming(data)
 			reply = "You sent: " + data.decode()
 			conn.sendall(reply.encode())
 		self.disconnect(conn)
