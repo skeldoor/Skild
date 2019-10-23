@@ -21,6 +21,8 @@ def main():
 	cm = Connection_manager()
 	cm.start_manager()
 	pm = Player_manager()
+	accept_thread = threading.Thread(target=cm.accept_loop, args=(pm,))
+	accept_thread.start()
 	t = threading.Thread(target=serverLoop, args=(cm, pm))
 	t.start()
 	
@@ -31,14 +33,14 @@ def serverLoop(cm, pm):
 		chill()
 
 def process(pm):
-	print("Processing...")
+	# print("Processing...")
 	pm.update()
 
 def publish(cm, pm):
 	cm.broadcast(pm)
 
 def chill():
-	print("Chilling...\n")
+	# print("Chilling...\n")
 	global running
 	global last_milli_time
 	timeSpentProcessing = current_milli_time() - last_milli_time

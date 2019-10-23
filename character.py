@@ -11,11 +11,11 @@ class Character(object):
 		self.direction = direction
 
 	def update(self):
-		if direction == 1:
-			self.yposition = self.yposition - speed
-		elif direction == 2:
-			self.xposition = self.xposition + speed
-		elif direction == 3:
-			self.yposition = self.yposition + speed
-		elif direction == 4:
-			self.xposition = self.xposition - speed
+		if self.direction == 1:
+			self.yposition = self.yposition - self.speed
+		elif self.direction == 2:
+			self.xposition = self.xposition + self.speed
+		elif self.direction == 3:
+			self.yposition = self.yposition + self.speed
+		elif self.direction == 4:
+			self.xposition = self.xposition - self.speed
