@@ -1,4 +1,5 @@
 import time
+import threading
 
 import config
 import connection_manager as cm
@@ -10,23 +11,31 @@ npcs = {}
 current_milli_time = lambda: int(round(time.time() * 1000))
 last_milli_time = current_milli_time()
 
-def main():
-	running = True
-	while running:
-		serverLoop()
+running = None
 
+def main():
+	global running
+	running = True
+	cm.start_manager()
+	t = threading.Thread(target=serverLoop)
+	t.start()
+	
 def serverLoop():
-	process()
-	publish()
-	chill()
+	while running:
+		process()
+		publish()
+		chill()
 
 def process():
-	pm.update()
+	print("Processing...")
+	# pm.update()
 
 def publish():
 	cm.broadcast()
 
 def chill():
+	print("Chilling...\n")
+	global running
 	global last_milli_time
 	timeSpentProcessing = current_milli_time() - last_milli_time
 	timeToSleep = (config.SERVER_TICK_RATE_MILLIS - timeSpentProcessing) / 1000
@@ -38,3 +47,4 @@ def chill():
 
 if __name__ == "__main__":
 	main()
+	
