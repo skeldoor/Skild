@@ -2,8 +2,8 @@ import time
 import threading
 
 import config
-import connection_manager as cm
-import player_manager as pm
+from connection_manager import Connection_manager
+from player_manager import Player_manager
 
 players = {}
 npcs = {}
@@ -13,25 +13,29 @@ last_milli_time = current_milli_time()
 
 running = None
 
+
+
 def main():
 	global running
 	running = True
+	cm = Connection_manager()
 	cm.start_manager()
-	t = threading.Thread(target=serverLoop)
+	pm = Player_manager()
+	t = threading.Thread(target=serverLoop, args=(cm, pm))
 	t.start()
 	
-def serverLoop():
+def serverLoop(cm, pm):
 	while running:
-		process()
-		publish()
+		process(pm)
+		publish(cm, pm)
 		chill()
 
-def process():
+def process(pm):
 	print("Processing...")
-	# pm.update()
+	pm.update()
 
-def publish():
-	cm.broadcast()
+def publish(cm, pm):
+	cm.broadcast(pm)
 
 def chill():
 	print("Chilling...\n")
