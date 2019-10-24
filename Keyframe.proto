@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package skild;
+
+message KEYFRAME {
+
+  message YOUDATA {
+    int32 playerID = 1;
+    int32 playerx = 2;
+    int32 playery = 3;
+    string playerColour = 4;
+  }
+
+  YOUDATA youData = 1;
+
+  message PLAYERDATA {
+    int32 playerID = 1;
+    int32 playerx = 2;
+    int32 playery = 3;
+    string playerColour = 4;
+  }
+
+  repeated PLAYERDATA playerData = 2;
+
+  message ZONES {
+    string zoneName = 1;
+    int32 zoneID = 2;
+	int32 zoneX = 3;
+	int32 zoneY = 4;
+  }
+
+  repeated ZONES zones = 3;
+
+  message BOSS {
+    string bossName = 1;
+    int32 bossHealth = 2;
+    int32 bossX = 3;
+    int32 bossY = 4;
+  }
+
+  BOSS boss = 4;
+}
