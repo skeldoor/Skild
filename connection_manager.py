@@ -42,16 +42,19 @@ class Connection_manager(object):
 		self.s.listen(10)
 		print("Listening...")
 
-	def accept_loop(self, pm):
+	def accept_loop(self, pm, gm):
 		while True:
 			conn, addr = self.s.accept()
 			print("[-] Connected to " + addr[0] + ":" + str(addr[1]))
-			start_new_thread(self.client_thread, (conn, pm))
+			start_new_thread(self.client_thread, (conn, pm, gm))
 		sys.exit(0)
 
-	def client_thread(self, conn, pm):
-		conn.send("Welcome to the Server.\n".encode())
+	def client_thread(self, conn, pm, gm):
+		conn.send("Welcome. Thanks for playing my game.\n".encode())
 		player = Player(25, 25, 1, 1, None, (255, 0, 255), "Player 1", 1, 1, conn)
+		keyframe = data_manager.format_keyframe(player, pm, gm)
+		conn.send(keyframe.encode())
+
 		pm.add(player)
 		while True:
 			data = conn.recv(1024)

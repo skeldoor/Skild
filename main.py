@@ -4,6 +4,7 @@ import threading
 import config
 from connection_manager import Connection_manager
 from player_manager import Player_manager
+from game_manager import Game_manager
 
 players = {}
 npcs = {}
@@ -16,10 +17,14 @@ running = None
 def main():
 	global running
 	running = True
+	init()
+
+def init():
+	gm = Game_manager()
 	cm = Connection_manager()
 	cm.start_manager()
 	pm = Player_manager()
-	accept_thread = threading.Thread(target=cm.accept_loop, args=(pm,))
+	accept_thread = threading.Thread(target=cm.accept_loop, args=(pm, gm))
 	accept_thread.start()
 	t = threading.Thread(target=serverLoop, args=(cm, pm))
 	t.start()
