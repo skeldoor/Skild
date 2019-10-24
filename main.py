@@ -1,10 +1,13 @@
 import time
 import threading
+import google
 
 import config
 from connection_manager import Connection_manager
 from player_manager import Player_manager
 from game_manager import Game_manager
+import Keyframe_pb2
+
 
 players = {}
 npcs = {}
@@ -20,6 +23,13 @@ def main():
 	init()
 
 def init():
+	keyFrame = Keyframe_pb2
+
+	keyFrame.KEYFRAME.YOUDATA.playerID = 123
+	print(keyFrame.KEYFRAME.YOUDATA.playerID)
+
+	quit()
+
 	gm = Game_manager()
 	cm = Connection_manager()
 	cm.start_manager()

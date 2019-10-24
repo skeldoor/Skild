@@ -1,4 +1,4 @@
-
+import Keyframe_pb2
 
 def parse_incoming(data):
 	print(data)
@@ -8,16 +8,12 @@ def format_outgoing(blob):
 
 def format_keyframe(player, pm, gm):
 	input = []
-	input = create_kv(input, "px", player.x)
-	input = create_kv(input, "py", player.y)
-	input = create_kv(input, "map" serialise_map_data(gm))
+
+	keyFrame = Keyframe_pb2()
+
 	return ",".join(map(str, input))
 
-def create_kv(input, key, value)
-	newKv = key + ":" + str(value)
-	return input.append(newKv)
-
-def serialise_map_data(gm)
+def serialise_map_data(gm):
 	mapData = []
 	mapDict = gm.get_map()
 	for zoneKey in mapDict:
