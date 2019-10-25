@@ -9,9 +9,29 @@ def format_outgoing(blob):
 def format_keyframe(player, pm, gm):
 	input = []
 
-	keyFrame = Keyframe_pb2()
+	keyFrame = Keyframe_pb2.KEYFRAME()
 
-	return ",".join(map(str, input))
+	youData.playerID = 123
+	youData.playerx = player.xposition
+	youData.playery = player.yposition
+	youData.playerColour = "yellow"
+
+	# playerList = pm.listPlayers()
+	# try:
+	# 	playerList = playerList.remove(player)
+	# except:
+	# 	pass
+
+	# count = 0
+	# for otherPlayer in playerList:
+	# 	playerData = keyFrame.PLAYERDATA.add()
+	# 	playerData.playerID = count
+	# 	playerData.playerX = otherPlayer.xposition
+	# 	playerData.playerY = otherPlayer.yposition
+	# 	count = count + 1
+
+	print("keyframe is: " + str(keyFrame))
+	return keyFrame.SerializeToString()
 
 def serialise_map_data(gm):
 	mapData = []

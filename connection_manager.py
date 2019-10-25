@@ -53,7 +53,8 @@ class Connection_manager(object):
 		conn.send("Welcome. Thanks for playing my game.\n".encode())
 		player = Player(25, 25, 1, 1, None, (255, 0, 255), "Player 1", 1, 1, conn)
 		keyframe = data_manager.format_keyframe(player, pm, gm)
-		conn.send(keyframe.encode())
+		conn.send(keyframe)
+		print(keyframe)
 
 		pm.add(player)
 		while True:
