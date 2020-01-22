@@ -56,7 +56,7 @@ class Connection_manager(object):
 			data = conn.recv(1024)
 			if not data:
 				break
-			data_parser.parse_incoming(data)
+			#data_parser.parse_incoming(data)
 			reply = "You sent: " + data.decode()
 			conn.sendall(reply.encode())
 		self.disconnect(conn)

@@ -31,11 +31,12 @@ def serverLoop(cm, pm):
 		chill()
 
 def process(pm):
-	# print("Processing...")
-	pm.update()
+	print("Processing...")
+	# pm.update()
 
 def publish(cm, pm):
-	cm.broadcast(pm)
+	print("Broadcasting...")
+	# cm.broadcast(pm)
 
 def chill():
 	# print("Chilling...\n")
